@@ -74,7 +74,7 @@ OpenMetadata can connect to all of these and gives a single dashboard showing:
 flowchart LR
     A[User Prompt] --> B[Agent Orchestrator]
 
-    B --> C[Intent Agent]
+    C[Intent Agent]
     C --> D[OpenMetadata Server]
     D --> E[PostgreSQL DB]
     D --> F[SQL Server DB]
@@ -162,7 +162,7 @@ Below shows a simplified way to fetch schema metadata via REST API before genera
 curl -X GET "http://<openmetadata-host>:8585/api/v1/tables?database=FinanceDB"      -H "Authorization: Bearer <access_token>"
 ```
 
-### Sample JSON Response
+### Sample JSON response
 
 ```json
 {
@@ -198,7 +198,7 @@ The LLM can use this metadata dynamically to construct accurate SQL queries acro
 
 ---
 
-## 8. Benefits Recap
+## 8. Benefits recap
 
 - Central metadata source for all databases
 - Auto-syncs with schema changes
@@ -208,7 +208,7 @@ The LLM can use this metadata dynamically to construct accurate SQL queries acro
 
 ---
 
-## 9. Next Steps
+## 9. Next steps
 
 1. Prototype a minimal OpenMetadata setup using Docker
 2. Connect PostgreSQL and MongoDB test instances
@@ -227,9 +227,10 @@ The LLM can use this metadata dynamically to construct accurate SQL queries acro
 
 ---
 
-## 10. References
+## 11. References
 
-- [OpenMetadata Documentation](https://open-metadata.org/docs)
+- [OpenMetadata Documentation](https://docs.open-metadata.org)
 - [GitHub: open-metadata/OpenMetadata](https://github.com/open-metadata/OpenMetadata)
-- [OpenMetadata API Reference](https://open-metadata.org/docs/api)
+- [OpenMetadata API Reference](https://docs.open-metadata.org/swagger.html)
+
 
