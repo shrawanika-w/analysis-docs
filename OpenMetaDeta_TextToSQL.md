@@ -28,7 +28,7 @@ It provides:
 
 OpenMetadata is **open source** (Apache 2.0 licensed) and deployable **on-prem** or **cloud**.
 
-### Architecture Snapshot
+### Architecture snapshot
 
 It runs in Docker or Kubernetes and usually consists of:
 - **Metadata Server** (central REST APIs and metadata store)
@@ -40,7 +40,7 @@ It runs in Docker or Kubernetes and usually consists of:
 
 The system is horizontally scalable and can be integrated into CI/CD for automatic metadata updates.
 
-### Typical Use Case Example
+### Typical usecase example
 
 Let's say a company has:
 - Data in Snowflake
@@ -57,7 +57,7 @@ OpenMetadata can connect to all of these and gives a single dashboard showing:
 
 ---
 
-## 3. Why We Need It
+## 3. Why need it for Text-To-SQL?
 
 | Challenge | Impact | Solution via OpenMetadata |
 |------------|---------|---------------------------|
@@ -68,7 +68,7 @@ OpenMetadata can connect to all of these and gives a single dashboard showing:
 
 ---
 
-## 4. Conceptual Architecture
+## 4. Conceptual architecture
 
 ```mermaid
 flowchart LR
@@ -111,24 +111,24 @@ flowchart LR
 
 ---
 
-## 5. Setup Overview
+## 5. Setup overview
 
 ### Components
 - **OpenMetadata Server:** central orchestration service (runs via Docker or Kubernetes)
-- **Metadata DB:** internal store (e.g. MySQL or PostgreSQL)
-- **Ingestion Pipelines:** connectors to external databases
-- **UI & API Access:** web console + REST + Python SDK
+- **Metadata DB:** internal store (e.g. MySQL or PostgreSQL via Docker)
+- **Ingestion Pipelines:** connectors to external databases 
+- **UI & API Access:** web console + REST + Python SDK 
 
 ### Deployment Steps
 1. Clone the OpenMetadata repo or use Docker Compose image
-2. Configure connections for each data source (PostgreSQL, MongoDB, etc.)
-3. Run metadata ingestion pipelines
+2. Configure connections for each data source (PostgreSQL, MongoDB etc)
+3. Run metadata ingestion pipelines (manual or Airflow)
 4. Access the OpenMetadata UI to verify data catalog
 5. Connect LLM via REST API or SDK to fetch schema information
 
 ---
 
-## 6. Future Maintenance and Updates
+## 6. Future maintenance and updates
 
 When a database schema changes (e.g. columns added/removed in the external DB):
 - Update ingestion configuration (optional; many auto-detect)
@@ -152,11 +152,11 @@ sequenceDiagram
 
 ---
 
-## 7. How LLM Queries OpenMetadata (Example)
+## 7. How LLM queries OpenMetadata (Example)
 
 Below shows a simplified way to fetch schema metadata via REST API before generating SQL.
 
-### REST API Example
+### REST API example
 
 ```bash
 curl -X GET "http://<openmetadata-host>:8585/api/v1/tables?database=FinanceDB"      -H "Authorization: Bearer <access_token>"
@@ -179,7 +179,7 @@ curl -X GET "http://<openmetadata-host>:8585/api/v1/tables?database=FinanceDB"  
 }
 ```
 
-### Python Pseudocode
+### Python pseudocode
 
 ```python
 import requests
@@ -215,7 +215,15 @@ The LLM can use this metadata dynamically to construct accurate SQL queries acro
 3. Integrate LLM with OpenMetadata API
 4. Measure accuracy improvements in generated SQL
 5. Extend to production databases after validation
-6. Integrate governance and data classification (PII/masking/risk scoring) from OpenMetadata to make your text-to-SQL model safer.
+   
+---
+
+## 10. Future possibilities
+1. Integrate governance and data classification (PII/masking/risk scoring) from OpenMetadata to make your text-to-SQL model safer.
+2. Add data lineage and impact analysis for explainable AI
+3. Tag PII data before LLM access for compliance
+4. Extend catalog to include prompt-to-SQL lineage tracking
+5. Use metadata to train schema-aware fine-tuned models
 
 ---
 
@@ -224,3 +232,4 @@ The LLM can use this metadata dynamically to construct accurate SQL queries acro
 - [OpenMetadata Documentation](https://open-metadata.org/docs)
 - [GitHub: open-metadata/OpenMetadata](https://github.com/open-metadata/OpenMetadata)
 - [OpenMetadata API Reference](https://open-metadata.org/docs/api)
+
